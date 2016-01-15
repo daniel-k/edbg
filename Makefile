@@ -34,7 +34,7 @@ else
   endif
 endif
 
-CFLAGS += -W -Wall -O2 -std=gnu99
+CFLAGS += -W -Wall -O2 -std=gnu99 -g3 -F dwarf2
 
 all: $(BIN)
 	

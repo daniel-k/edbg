@@ -330,6 +330,9 @@ int main(int argc, char **argv)
   dap_led(0, 1);
   dap_reset_link();
   dap_swj_clock(DAP_FREQ);
+//  printf("reset target hw\n");
+//  dap_reset_target_hw();
+  printf("target prepare\n");
   dap_target_prepare();
 
   target->ops->select();

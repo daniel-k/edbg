@@ -323,6 +323,9 @@ uint32_t dap_read_reg(uint8_t reg)
   buf[3] = reg | DAP_TRANSFER_RnW;
   dbg_dap_cmd(buf, sizeof(buf), 4);
 
+  printf("got response while reading the register 0x%02x (count = %d, value = %d)",
+        reg, buf[0], buf[1]);
+
   if (1 != buf[0] || DAP_TRANSFER_OK != buf[1])
   {
     error_exit("invalid response while reading the register 0x%02x (count = %d, value = %d)",
@@ -337,7 +340,7 @@ uint32_t dap_read_reg(uint8_t reg)
 void dap_write_reg(uint8_t reg, uint32_t data)
 {
   uint8_t buf[8];
-
+  printf("write to 0x%08x to reg 0x%02x\n", data, reg);
   buf[0] = ID_DAP_TRANSFER;
   buf[1] = 0x00; // DAP index
   buf[2] = 0x01; // Request size
@@ -490,6 +493,8 @@ uint32_t dap_read_idcode(void)
 //-----------------------------------------------------------------------------
 void dap_target_prepare(void)
 {
+//  printf("\nreading now!\n");
+//  printf("idcode: 0x%08x\n", dap_read_idcode());
   dap_write_reg(SWD_DP_W_ABORT, 0x00000016);
   dap_write_reg(SWD_DP_W_SELECT, 0x00000000);
   dap_write_reg(SWD_DP_W_CTRL_STAT, 0x50000f00);
