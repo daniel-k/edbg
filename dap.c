@@ -181,6 +181,7 @@ void dap_disconnect(void)
 
   buf[0] = ID_DAP_DISCONNECT;
   dbg_dap_cmd(buf, sizeof(buf), 1);
+  dap_reset_link();
 }
 
 //-----------------------------------------------------------------------------
